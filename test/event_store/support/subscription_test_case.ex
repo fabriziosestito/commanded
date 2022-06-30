@@ -756,12 +756,16 @@ defmodule Commanded.EventStore.SubscriptionTestCase do
     end
 
     defp unsubscribe(event_store, event_store_meta, subscription) do
+      wait_for_event_store()
+
       :ok = event_store.unsubscribe(event_store_meta, subscription)
 
       wait_for_event_store()
     end
 
     defp stop_subscriber(subscriber) do
+      wait_for_event_store()
+
       ProcessHelper.shutdown(subscriber)
 
       wait_for_event_store()
